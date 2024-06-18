@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def misclassification_error(y_true: np.ndarray, y_pred: np.ndarray, normalize: bool = True) -> float:
     """
     Calculate misclassification loss
@@ -17,7 +18,15 @@ def misclassification_error(y_true: np.ndarray, y_pred: np.ndarray, normalize: b
     -------
     Misclassification of given predictions
     """
-    raise NotImplementedError()
+    misclassification = 0
+    for i in range(len(y_true)):
+        if y_true[i] != y_pred[i]:
+            misclassification += 1
+
+    if normalize:
+        return misclassification / len(y_true)
+    else:
+        return misclassification
 
 
 def accuracy(y_true: np.ndarray, y_pred: np.ndarray) -> float:
@@ -35,4 +44,4 @@ def accuracy(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     -------
     Accuracy of given predictions
     """
-    raise NotImplementedError()
+    return np.mean(y_true == y_pred)
